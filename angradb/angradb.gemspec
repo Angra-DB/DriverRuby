@@ -6,11 +6,11 @@ require "angradb/version"
 Gem::Specification.new do |spec|
   spec.name          = "angradb"
   spec.version       = Angradb::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["Jadiel Teófilo"]
   spec.email         = ["teofilojadiel@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = "A ruby gem to interface with Angradb"
+  spec.description   = "A gem that makes a tcp connection with Angradb and allows operations related with it"
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
