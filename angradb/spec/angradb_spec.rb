@@ -10,6 +10,18 @@ RSpec.describe Angradb do
     ip_port = 1234
     expect{Angradb::Driver.new(ip_address, ip_port)}.not_to raise_error
   end
+
+  describe 'Create' do
+    before(:each) do
+      ip_address = '127.0.0.1'
+      ip_port = 1234
+      @cursor = Angradb::Driver.new(ip_address, ip_port)
+    end
+    it 'should successfully create a db when required' do
+      expect { @cursor.create_db('test_db') }.not_to raise_error
+    end
+  end
+
   describe 'Connect' do
     before(:each) do
       ip_address = '127.0.0.1'

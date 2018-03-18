@@ -27,6 +27,18 @@ module Angradb
       response
     end
 
+    # Creates a specific database on Angradb
+    # Params:
+    # +db_name+:: name of the database
+    # Returns:
+    # +response+:: response of the server
+    def create_db(db_name)
+      request = "create_db " + db_name
+      response = send_to_server request
+      raise response if response.include? 'does not exist'
+      response
+    end
+
     private
 
     def open_tcp_connection
