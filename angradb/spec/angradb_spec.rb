@@ -18,7 +18,8 @@ RSpec.describe Angradb do
       @cursor = Angradb::Driver.new(ip_address, ip_port)
     end
     it 'should successfully create a db when required' do
-      expect { @cursor.create_db('test_db') }.not_to raise_error
+      @cursor.create_db('test_db_creation')
+      expect { @cursor.connect('test_db_creation') }.not_to raise_error
     end
   end
 

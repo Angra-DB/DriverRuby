@@ -34,9 +34,7 @@ module Angradb
     # +response+:: response of the server
     def create_db(db_name)
       request = "create_db " + db_name
-      response = send_to_server request
-      raise response if response.include? 'does not exist'
-      response
+      send_to_server request
     end
 
     private
