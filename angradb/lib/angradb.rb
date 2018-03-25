@@ -37,13 +37,27 @@ module Angradb
       send_to_server request
     end
 
+    # Creates a document on the connected database on Angradb
+    # Params:
+    # +doc+:: document to be saved
+    # Returns:
+    # +key+:: returns the key for the saved document
+    def save(doc)
+      request = "save " + doc
+      response = send_to_server request
+      # check if the response is the 25 char key
+      raise 'Error on saving the document' unless response.is_a? String and response.size == 25
+      # returns the key without the quotes
+      response.delete '"'
+    end
+
     private
 
     def open_tcp_connection
       begin
         @session = TCPSocket.new @ip_address, @ip_port
       rescue
-        raise "Couldnt connect with the socket-server"
+        raise 'Couldnt connect with the socket-server'
       end
     end
 
