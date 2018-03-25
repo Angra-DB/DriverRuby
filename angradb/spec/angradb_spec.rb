@@ -34,4 +34,17 @@ RSpec.describe Angradb do
       expect { @cursor.connect('test_db') }.not_to raise_error
     end
   end
+
+  describe 'Save' do
+    before(:each) do
+      ip_address = '127.0.0.1'
+      ip_port = 1234
+      @cursor = Angradb::Driver.new(ip_address, ip_port)
+      @cursor.create_db 'test_db'
+      @cursor.connect('test_db')
+    end
+    it 'should successfully save a document to a db' do
+      expect { @cursor.save('document') }.not_to raise_error
+    end
+  end
 end
