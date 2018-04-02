@@ -47,4 +47,18 @@ RSpec.describe Angradb do
       expect { @cursor.save('document') }.not_to raise_error
     end
   end
+
+  describe 'Update' do
+    before(:each) do
+      ip_address = '127.0.0.1'
+      ip_port = 1234
+      @cursor = Angradb::Driver.new(ip_address, ip_port)
+      @cursor.create_db 'test_db_update'
+      @cursor.connect('test_db_update')
+    end
+    it 'should successfully update a document of the db' do
+      key = @cursor.save('new document')
+      expect { @cursor.update(key, 'document updated') }.not_to raise_error
+    end
+  end
 end
