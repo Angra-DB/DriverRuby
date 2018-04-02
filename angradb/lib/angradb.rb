@@ -21,7 +21,7 @@ module Angradb
     # Returns:
     # +response+:: response of the server
     def connect(db_name)
-      request = "connect " + db_name
+      request = 'connect ' + db_name
       response = send_to_server request
       raise response if response.include? 'does not exist'
       response
@@ -33,7 +33,7 @@ module Angradb
     # Returns:
     # +response+:: response of the server
     def create_db(db_name)
-      request = "create_db " + db_name
+      request = 'create_db ' + db_name
       send_to_server request
     end
 
@@ -43,7 +43,7 @@ module Angradb
     # Returns:
     # +key+:: returns the key for the saved document
     def save(doc)
-      request = "save " + doc
+      request = 'save ' + doc
       response = send_to_server request
       # check if the response is the 25 char key
       raise 'Error on saving the document' unless response.is_a? String and response.size == 25
