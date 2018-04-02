@@ -51,6 +51,21 @@ module Angradb
       response.delete '"'
     end
 
+    # Creates a document on the connected database on Angradb
+    # Params:
+    # +key+:: the key for the document
+    # +doc+:: document to be saved
+    # # Returns:
+    # +response+:: response of the server
+    def update(key, doc)
+      request = 'update ' + key + ' ' + doc
+      response = send_to_server request
+      # check if the response is the 25 char key
+      raise 'Error on updating the document' unless response == "ok"
+      # returns the key without the quotes
+      response
+    end
+
     private
 
     def open_tcp_connection
