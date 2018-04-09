@@ -61,4 +61,22 @@ RSpec.describe Angradb do
       expect { @cursor.update(key, 'document updated') }.not_to raise_error
     end
   end
+
+  describe 'LookUp' do
+    before(:each) do
+      ip_address = '127.0.0.1'
+      ip_port = 1234
+      @cursor = Angradb::Driver.new(ip_address, ip_port)
+      @cursor.create_db 'test_db'
+      @cursor.connect('test_db')
+    end
+    it 'should successfully lookup a document of the db' do
+      key = @cursor.save('new document lookup_test')
+      expect { @cursor.look_up(key) }.not_to raise_error
+    end
+    it 'should return the right document' do
+      key = @cursor.save('new document lookup_test')
+      expect { @cursor.look_up(key) }.to eq 'new document lookup_test'
+    end
+  end
 end
