@@ -37,7 +37,7 @@ module Angradb
       send_to_server request
     end
 
-    # Creates a document on the connected database on Angradb
+    # Creates a document on the connected database of Angradb
     # Params:
     # +doc+:: document to be saved
     # Returns:
@@ -51,7 +51,7 @@ module Angradb
       response.delete '"'
     end
 
-    # Creates a document on the connected database on Angradb
+    # Updates a document on the connected database of Angradb
     # Params:
     # +key+:: the key for the document
     # +doc+:: document to be saved
