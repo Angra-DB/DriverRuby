@@ -60,7 +60,19 @@ module Angradb
     def update(key, doc)
       request = 'update ' + key + ' ' + doc
       response = send_to_server request
-      # check if the response is the 25 char key
+      raise 'Error on updating the document' unless response == "ok"
+      # returns the key without the quotes
+      response
+    end
+
+    # Looks up a document on the connected database on Angradb
+    # Params:
+    # +key+:: the key for the document
+    # # Returns:
+    # +response+:: the requested document
+    def look_up(key)
+      request = 'lookup ' + key
+      response = send_to_server request
       raise 'Error on updating the document' unless response == "ok"
       # returns the key without the quotes
       response
