@@ -79,4 +79,21 @@ RSpec.describe Angradb do
       expect { @cursor.look_up(key) }.to eq 'new document lookup_test'
     end
   end
+
+  describe 'Delete' do
+    before(:each) do
+      ip_address = '127.0.0.1'
+      ip_port = 1234
+      @cursor = Angradb::Driver.new(ip_address, ip_port)
+      @cursor.create_db 'test_db'
+      @cursor.connect('test_db')
+      @key = @cursor.save('new document delete_test')
+    end
+    it 'should successfully delete a document of the db' do
+      expect { @cursor.delete(@key) }.not_to raise_error
+    end
+    it 'should not return a deleted document' do
+      expect { @cursor.look_up(@key) }.to raise_error
+    end
+  end
 end
