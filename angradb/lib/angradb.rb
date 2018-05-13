@@ -60,7 +60,7 @@ module Angradb
     def update(key, doc)
       request = 'update ' + key + ' ' + doc
       response = send_to_server request
-      raise 'Error on updating the document' unless response == "ok"
+      raise 'Error on updating the document: ' + response unless response == "ok"
       # returns the key without the quotes
       response
     end
