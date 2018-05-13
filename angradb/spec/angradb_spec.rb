@@ -12,7 +12,7 @@ RSpec.describe Angradb do
   end
 
   describe 'Create' do
-    before(:each) do
+    before(:all) do
       ip_address = '127.0.0.1'
       ip_port = 1234
       @cursor = Angradb::Driver.new(ip_address, ip_port)
@@ -24,7 +24,7 @@ RSpec.describe Angradb do
   end
 
   describe 'Connect' do
-    before(:each) do
+    before(:all) do
       ip_address = '127.0.0.1'
       ip_port = 1234
       @cursor = Angradb::Driver.new(ip_address, ip_port)
@@ -36,7 +36,7 @@ RSpec.describe Angradb do
   end
 
   describe 'Save' do
-    before(:each) do
+    before(:all) do
       ip_address = '127.0.0.1'
       ip_port = 1234
       @cursor = Angradb::Driver.new(ip_address, ip_port)
