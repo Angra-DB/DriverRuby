@@ -74,6 +74,16 @@ module Angradb
       request = 'lookup ' + key
       response = send_to_server request
       raise 'Error on updating the document' unless response == "ok"
+    # Deletes a document on the connected database on Angradb
+    # Params:
+    # +key+:: the key for the document
+    # # Returns:
+    # +response+:: the server response
+    def delete(key)
+      raise 'A key should be provided' unless key
+      request = 'delete ' + key
+      response = send_to_server request
+      raise 'Error deleting the document: ' + response unless response == "ok"
       # returns the key without the quotes
       response
     end
