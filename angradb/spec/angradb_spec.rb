@@ -49,51 +49,67 @@ RSpec.describe Angradb do
   end
 
   describe 'Update' do
-    before(:each) do
+    before(:all) do
       ip_address = '127.0.0.1'
       ip_port = 1234
       @cursor = Angradb::Driver.new(ip_address, ip_port)
-      @cursor.create_db 'test_db_update'
-      @cursor.connect('test_db_update')
+      @cursor.create_db 'test_db'
+      @cursor.connect('test_db')
+    end
+    before(:each) do
+      @key = @cursor.save('new document')
+    end
+    after(:each) do
+      @cursor.delete(@key)
     end
     it 'should successfully update a document of the db' do
-      key = @cursor.save('new document')
-      expect { @cursor.update(key, 'document updated') }.not_to raise_error
+      expect { @cursor.update(@key, 'document updated') }.not_to raise_error
     end
   end
 
   describe 'LookUp' do
-    before(:each) do
+    before(:all) do
       ip_address = '127.0.0.1'
       ip_port = 1234
       @cursor = Angradb::Driver.new(ip_address, ip_port)
       @cursor.create_db 'test_db'
       @cursor.connect('test_db')
     end
+    before(:each) do
+      @key = @cursor.save('new document lookup_test')
+    end
+    after(:each) do
+      @cursor.delete(@key)
+    end
     it 'should successfully lookup a document of the db' do
-      key = @cursor.save('new document lookup_test')
-      expect { @cursor.look_up(key) }.not_to raise_error
+      expect { @cursor.look_up(@key) }.not_to raise_error
     end
     it 'should return the right document' do
-      key = @cursor.save('new document lookup_test')
-      expect { @cursor.look_up(key) }.to eq 'new document lookup_test'
+      response = @cursor.look_up(@key)
+      expect(response).to eql '"new document lookup_test"'
     end
   end
 
   describe 'Delete' do
-    before(:each) do
+    before(:all) do
       ip_address = '127.0.0.1'
       ip_port = 1234
       @cursor = Angradb::Driver.new(ip_address, ip_port)
       @cursor.create_db 'test_db'
       @cursor.connect('test_db')
+    end
+    before(:each) do
       @key = @cursor.save('new document delete_test')
     end
     it 'should successfully delete a document of the db' do
       expect { @cursor.delete(@key) }.not_to raise_error
     end
     it 'should not return a deleted document' do
+      byebug
       expect { @cursor.look_up(@key) }.to raise_error
+    end
+    after(:each) do
+      @cursor.delete(@key)
     end
   end
 end
