@@ -102,14 +102,12 @@ RSpec.describe Angradb do
       @key = @cursor.save('new document delete_test')
     end
     it 'should successfully delete a document of the db' do
-      expect { @cursor.delete(@key) }.not_to raise_error
+      response = @cursor.delete(@key)
+      expect(response).to eq 'ok'
     end
     it 'should not return a deleted document' do
-      byebug
-      expect { @cursor.look_up(@key) }.to raise_error
-    end
-    after(:each) do
       @cursor.delete(@key)
+      expect { @cursor.look_up(@key) }.to raise_error(RuntimeError)
     end
   end
 end
