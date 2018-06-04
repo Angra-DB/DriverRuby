@@ -73,7 +73,11 @@ module Angradb
     def look_up(key)
       request = 'lookup ' + key
       response = send_to_server request
-      raise 'Error on updating the document' unless response == "ok"
+      raise 'Error on lookup of the document: ' + response if response == "not_found"
+      # returns the key without the quotes
+      response
+    end
+
     # Deletes a document on the connected database on Angradb
     # Params:
     # +key+:: the key for the document
