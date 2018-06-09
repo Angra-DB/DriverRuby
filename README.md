@@ -2,6 +2,8 @@
 
 A ruby gem to interface with AngraDB allowing CRUD operations in a encapsulated way.
 
+Gem link: `https://rubygems.org/gems/angradb`
+
 ## Installation
 
 Add this line to your application's Gemfile:
